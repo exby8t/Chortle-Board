@@ -1,0 +1,27 @@
+<h1>Family Members</h1>
+
+
+<% @members.each do |member| %>
+    <div class="member-profile">  
+    <h3><%= member.first_name %>
+    <%= member.last_name %>
+    </h3>
+    <p>
+        Email: <%= member.email %> <br />
+        
+        Birthdate: <%= member.birthdate %><br />
+        Family: <%= member.family %><br />
+        Type: <%= member.member_type %><br />
+    </p>
+        <div class="actions">
+            <%= link_to 'View', family_member_path(member.family.slug, member), :class => "btn btn-small" %>
+            <%= link_to 'Update', edit_family_member_path(member.family.slug, member), :class => "btn btn-small"%>
+            <%= link_to 'Remove', family_member_path(member.family.slug, member), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-warning" %>
+        </div>
+    </div>
+<% end %>
+
+
+<br />
+
+<%= link_to 'New Member', new_family_member_path(params[:family_id]) %>

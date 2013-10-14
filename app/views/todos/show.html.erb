@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Member:</b>
+  <%= @todo.member %>
+</p>
+
+<p>
+  <b>Task:</b>
+  <%= @todo.task %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @todo.year %>
+</p>
+
+<p>
+  <b>Month:</b>
+  <%= @todo.month %>
+</p>
+
+<p>
+  <b>Week:</b>
+  <%= @todo.week %>
+</p>
+
+<p>
+  <b>Day:</b>
+  <%= @todo.day %>
+</p>
+
+<p>
+  <b>Family:</b>
+  <%= @todo.family %>
+</p>
+
+<p>
+  <b>Is completed:</b>
+  <%= @todo.is_completed %>
+</p>
+
+
+<%= link_to 'Edit', edit_todo_path(@todo) %> |
+<%= link_to 'Back', todos_path %>

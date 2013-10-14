@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @task.name %>
+</p>
+
+<p>
+  <b>Points:</b>
+  <%= @task.points %>
+</p>
+
+<p>
+  <b>Interval:</b>
+  <%= @task.interval %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @task.category %>
+</p>
+
+<p>
+  <b>Age limit:</b>
+  <%= @task.age_limit %>
+</p>
+
+<p>
+  <b>Is active:</b>
+  <%= @task.is_active %>
+</p>
+
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

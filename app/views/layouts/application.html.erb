@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Worlds of Jesse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  </head>
+
+  <body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+
+  <!-- Navbar
+    ================================================== -->
+ <div class="navbar navbar-fixed-top">
+   <div class="navbar-inner">
+     <div class="container">
+       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+       <a class="brand" href="/">Chore Board</a>
+       <div class="nav-collapse collapse" id="main-menu">
+        <ul class="nav" id="main-menu-left">
+         
+          <li><a id="home-link" href="/">Home</a></li>
+          
+
+
+              <!-- render 'global/country_menu' -->
+              <!-- render 'global/history_menu' -->
+
+
+
+        </ul>
+        <ul class="nav pull-right" id="main-menu-right">
+
+
+          
+     <!-- render 'global/manage_menu' -->
+
+
+          <li>
+            <% if session[:member] %>
+<a rel="tooltip" href="<%= logout_path %>" title="Logout" >Logout
+               <i class="icon-share-alt"></i>
+             </a>
+            <% else %>
+<a rel="tooltip" href="<%= login_path %>" title="Login to manage" >Login
+               <i class="icon-share-alt"></i>
+             </a>
+            <% end %>
+            
+           </li>
+          
+        </ul>
+       </div>
+     </div>
+   </div>
+ </div>
+
+    <div class="container">
+
+
+<!-- Masthead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="row">
+    <div class="span6">
+    </div>
+    <div class="span6">
+     </div>
+  </div>
+    <!--
+  <div class="subnav">
+    <ul class="nav nav-pills">
+      <li><a href="/countires">Countires</a></li>
+      <li><a href="/history">History</a></li>
+      
+    </ul>
+  </div>
+  -->
+</header>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-success span12">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+
+<%= yield %>
+
+     <!-- Footer
+      ================================================== -->
+      <hr>
+
+      <footer id="footer">
+       
+        Made by <a href="#">Multiplied by Infinity</a>. 
+
+        <!-- 
+        Based on <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>. Hosted on <a href="http://pages.github.com/">GitHub</a>. Icons from <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts">Google</a>. Favicon by <a href="https://twitter.com/geraldhiller">Gerald Hiller</a>.</p>
+        -->
+
+        
+      </footer>
+
+    </div><!-- /container -->
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/assets/jquery.smooth-scroll.min.js"></script>
+
+    
+
+
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<%= form_for([:family, @member]) do |f| %>
+  <% if @member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+      <% @member.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :birthdate %>
+    <%= f.date_select :birthdate %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :member_type %>
+    <%= f.collection_select :member_type_id, MemberType.all, :id, :name %>
+  </div>
+
+  <%= f.hidden_field :family_id, :value => params[:family_id]  %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= debug @member %>
+<%= debug params %>
