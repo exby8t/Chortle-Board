@@ -2,7 +2,13 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    
+    if session[:member]
+      @members = Family.find(session[:member][:family][:id]).members
+    else
+      @members = Member.all
+    end
+    
 
     respond_to do |format|
       format.html # index.html.erb

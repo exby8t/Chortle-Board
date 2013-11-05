@@ -1,16 +1,14 @@
 ChoreBoardApp::Application.routes.draw do
 
+  get "home/index"
+  get "home/about"
+
+  get ":family_id/todos/list" => 'todos#list'
+
   resources :todos
-
-
   resources :tasks
-
-
   resources :intervals
-
-
   resources :categories
-
 
   get '/login' => 'login#index', :as => :login
   post '/login' => 'login#authenticate', :as => :process_login
@@ -19,10 +17,20 @@ ChoreBoardApp::Application.routes.draw do
   resources :administrators
   resources :members
   resources :member_types
+  resources :families
 
     resources :families, path: "/" do 
-        resources :members
+       resources :members
+       resources :tasks
+       resources :todos
     end
+  
+  match '/todos/:id/assign/:member_id' => 'todos#assign', :as => :assign_todo
+  match '/todos/:id/unassign/:member_id' => 'todos#unassign', :as => :unassign_todo
+
+
+  root :to => 'home#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

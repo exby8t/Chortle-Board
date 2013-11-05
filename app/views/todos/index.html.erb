@@ -1,37 +1,137 @@
-<h1>Listing todos</h1>
+<style>
+  div#current-points{
+    float:right;
+    width:200px;
+    padding:20px;
+    text-align: center;
+    background-color: #ececec;
+  }
 
-<table>
-  <tr>
-    <th>Member</th>
-    <th>Task</th>
-    <th>Year</th>
-    <th>Month</th>
-    <th>Week</th>
-    <th>Day</th>
-    <th>Family</th>
-    <th>Is completed</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  .todo-title{font-weight: bold; font-size: 20px; margin-bottom:0px;}
 
-<% @todos.each do |todo| %>
-  <tr>
-    <td><%= todo.member %></td>
-    <td><%= todo.task %></td>
-    <td><%= todo.year %></td>
-    <td><%= todo.month %></td>
-    <td><%= todo.week %></td>
-    <td><%= todo.day %></td>
-    <td><%= todo.family %></td>
-    <td><%= todo.is_completed %></td>
-    <td><%= link_to 'Show', todo %></td>
-    <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
-    <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  .todo-title input[type='checkbox']:checked {
+    background: #abd;
+}
+
+
+  .todo-title input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    
+    border-radius:5px;
+    border:2px solid #555;
+    margin-top:0px;
+}
+  .todo-details{font-style: italic;margin-left:20px;}
+</style>
+
+<div id="current-points">
+  <span id="current-points-number"></span>
+</div>
+
+<h1>All Todos Up for Grabs!!!</h1>
+
+<% @todos.keys.each do | key | %>
+<div class="span12 well">
+    <h2>This <%= key.capitalize %></h2>
+    
+    <% @todos[key].each do | todo | %>
+    
+    <div id="<%= todo.id %>" class="span5 todo-box <%= key %>" week="<%= todo.week %>">
+
+      <p class="todo-title">
+      
+        <input  
+            class="assign-box"
+            type="checkbox" 
+            name="todo[id]" 
+            value="<%= todo.id %>" 
+            points="<%= todo.task.points %>"
+
+            <% if todo.assigned? %>
+              checked="true"
+            <% end %>
+            >
+          <input  type="hidden" 
+            name="member[id]" 
+            value="<%= session[:member][:id] %>">
+          <%= todo.task.name %>
+        </p>
+       
+        <p class="todo-details">
+          Worth <%= todo.task.points %> points<br/>
+          Due on <%= todo.due_on.strftime("%A %m/%d/%Y") %>
+        </p>
+
+    </div>
+
+      
+    <% end %>
+</div>
 <% end %>
-</table>
 
-<br />
 
-<%= link_to 'New Todo', new_todo_path %>
+
+
+<script>
+  
+  $(document).ready(function(){
+    $('input').change(function(){
+        var endpoint = 'http://localhost:3000/todos';
+        var url = endpoint
+        var is_checked = $(this).is(':checked');
+        var action = 'unassign';
+        var id = $(this).val();
+
+        if( is_checked){
+          var action = 'assign';
+        }
+
+        var member_id = <%= session[:member][:id] %>
+
+        url = endpoint + '/' + id + '/' + action + '/' + member_id;
+        
+        console.log('send to ' + url) ;
+
+        $.ajax(
+            {
+              url:url,
+              //type: "POST",
+              //contentType:"application/json; charset=utf-8",
+              //dataType:"json",
+              
+              success:function(result){
+                calculate_points();
+                }
+          });
+
+
+    })
+
+      $('div.todo-box.day').hide();
+      
+      $('div.todo-box').filter('.day').each(function(){
+        if($(this).attr('week') == <%= @week %> ){
+          console.log('show')
+          console.log($(this))
+          $(this).fadeIn();
+        }
+      })
+
+
+      function calculate_points(){
+        var totes = 0;
+        $('span#current-points-number').text(totes);
+        
+        $('input.assign-box:checked').each(function(){
+          totes = totes +  $(this).attr('points') * 1;
+          //console.log(totes)
+          $('span#current-points-number').text(totes);
+        })
+      }
+
+      calculate_points();
+  })
+
+</script>

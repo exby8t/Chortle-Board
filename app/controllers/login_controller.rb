@@ -19,12 +19,12 @@ class LoginController < ApplicationController
 
     
     if @member
-
       session[:member] = {}
       session[:member][:id] = @member.id
       session[:member][:name] = @member.first_name
+      session[:member][:family] = {:id => @member.family.id, :name => @member.family.name}
 
-      redirect_to family_members_path(@member.family.id)
+      redirect_to family_todos_path(@member.family)
       
     else
 

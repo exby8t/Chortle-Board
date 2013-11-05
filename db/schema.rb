@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131014002416) do
+ActiveRecord::Schema.define(:version => 20131105174640) do
 
   create_table "administrators", :force => true do |t|
     t.string   "email"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20131014002416) do
     t.boolean  "is_active"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "family_id"
   end
 
   add_index "tasks", ["category_id"], :name => "index_tasks_on_category_id"

@@ -1,0 +1,13 @@
+body{font-size: 1.2em}
+
+table{
+	min-width: 60%; border-radius: 6px; border: thin solid #85919c;
+	border-spacing:0;
+    border-collapse:collapse;
+}
+
+table tr{}
+table tr.dark{background-color: #ececec}
+table td, table th{padding:10px;}
+table th{background-color: #85919c; color:#333; text-align: left}
+table td{padding:10px;}

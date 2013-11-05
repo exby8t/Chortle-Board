@@ -1,0 +1,33 @@
+<h1>All Todos Up for Grabs!!!</h1>
+
+<p>There are <%= @todos.count %> todos to be taken care of. so, what are you waiting for</p>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Category</th>
+    <th>Task</th>
+    <th>Interval</th>
+    <th>Point Value</th>
+    <th>Due on </th>
+
+  </tr>
+
+<% @todos.each do |todo| %>
+  <tr>
+    <td><%= todo.id %></td>
+    <td><%= todo.task.category.name %></td>
+    <td><%= todo.task.name %></td>
+    <td><%= todo.task.interval.name %></td>
+    <td><%= todo.task.points %></td>
+    <td><%= todo.due_on %></td>
+    <td>
+
+    </td>
+</td>
+  </tr>
+<% end %>
+
+</table>
+
+<%= debug @grouped %>

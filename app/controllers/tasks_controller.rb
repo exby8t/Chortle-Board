@@ -2,7 +2,11 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    if session[:member]
+      @tasks = Family.find(session[:member][:family][:id]).tasks
+    else
+      @tasks = Task.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb

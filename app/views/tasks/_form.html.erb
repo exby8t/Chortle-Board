@@ -38,6 +38,12 @@
     <%= f.label :is_active %>
     <%= f.check_box :is_active %>
   </div>
+  <% if session[:member][:family][:id] %>
+    <%= f.hidden_field :family_id, :value => session[:member][:family][:id]  %>
+  <% else %>
+    <%= f.hidden_field :family_id, :value => params[:family_id]  %>
+  <% end %>
+  
   <div class="actions">
     <%= f.submit :class => 'btn'%>
   </div>

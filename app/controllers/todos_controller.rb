@@ -1,8 +1,72 @@
 class TodosController < ApplicationController
   # GET /todos
   # GET /todos.json
+
+  def assign
+    @todo = Todo.find(params[:id])
+    @todo.member_id = params[:member_id]
+    @todo.save
+
+    respond_to do |format|
+        if @todo.save
+          format.html { redirect_to @todo, notice: 'Todo was successfully assigned.' }
+          format.json { render json: @todo, status: :created, location: @todo }
+        else
+          format.html { render action: "update" }
+          format.json { render json: @todo.errors, status: :unprocessable_entity }
+        end
+      end    
+  end
+
+  def unassign
+    @todo = Todo.find(params[:id])
+    @todo.member_id = nil
+    @todo.save
+
+    puts "unsassigned user"
+
+    respond_to do |format|
+        if @todo.save
+          format.html { redirect_to @todo, notice: 'Todo was successfully unassigned.' }
+          format.json { render json: @todo, status: :created, location: @todo }
+        else
+          format.html { render action: "update" }
+          format.json { render json: @todo.errors, status: :unprocessable_entity }
+        end
+      end    
+  end
+
+
+  def list
+   @todos = Todo.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @tasks }
+    end
+  end
+
+
   def index
-    @todos = Todo.all
+
+    #generate missing todos from tasks
+    @family = Family.find(session[:member][:family][:id])
+    @scheduler = Scheduler.new(@family)
+    @scheduler.generate_todos(Date.today)
+    @week = Date.today.cweek
+
+
+    @todos = {
+     :week => Todo.where(:year => Date.today.year, :month => Date.today.mon, :week => Date.today.cweek, :day => nil ),
+     :day => Todo.where(:year => Date.today.year, :month => Date.today.mon).where('day IS NOT NULL'),
+     :month => Todo.where(:year => Date.today.year, :month => Date.today.mon, :week => nil, :day => nil )
+ 
+    }
+
+
+    if params[:list] 
+      @todos = Todo.all
+      render "list"
+    end
 
     respond_to do |format|
       format.html # index.html.erb

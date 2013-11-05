@@ -107,10 +107,11 @@
        
         Made by <a href="#">Multiplied by Infinity</a>. 
 
-        <!-- 
-        Based on <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>. Hosted on <a href="http://pages.github.com/">GitHub</a>. Icons from <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts">Google</a>. Favicon by <a href="https://twitter.com/geraldhiller">Gerald Hiller</a>.</p>
-        -->
+      <% if session[:member] %>
+        <%= debug session[:member] %>
+      <% end %>
 
+      <%= debug params %>
         
       </footer>
 

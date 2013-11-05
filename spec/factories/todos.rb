@@ -1,13 +1,13 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
-
+require 'date'
 FactoryGirl.define do
   factory :todo do
     member nil
     task nil
-    year 1
-    month 3
-    week 23
-    day 1
+    year Date.today.year
+    month Date.today.month
+    week Date.today.cweek
+    day Date.today.mday
     family nil
     is_completed false
   end

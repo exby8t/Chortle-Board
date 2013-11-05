@@ -1,5 +1,12 @@
 require 'spec_helper'
 
 describe Family do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+	it "has an array of tasks" do 
+		expect(@family.tasks).to be_a Array
+	end
+	
+	it "has an array of membmers" do 
+		expect(@family.members).to be_a Array
+	end
 end
