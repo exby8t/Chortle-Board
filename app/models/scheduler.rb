@@ -14,8 +14,9 @@ class Scheduler
 
 
 
-  def generate_todos
-  	@tasks = Task.all
+  def generate_todos(start_on)
+  	@tasks = Task.all 
+    @start_on = start_on
 
   	@tasks.each do | task | 
   		
@@ -31,18 +32,37 @@ class Scheduler
 
   end
 
+  def get_first_day(now)
+    
+    today = @start_on
+    diff = 0 + now.wday + 1
+    now - diff.days
+
+  end
+
+
+
 
   def generate_monthly_tasks(task)
-    Todo.find_or_create_by_family_id_and_task_id_and_year_and_month(@family.id, task.id, @ts_params[:y], @ts_params[:m] )
+    Todo.generate_monthly(@family.id, task.id, Date.today )
   end
 
   def generate_weekly_tasks(task)
-    Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week(@family.id, task.id, @ts_params[:y], @ts_params[:m],@ts_params[:w] )
+    Todo.generate_weekly(@family.id, task.id, Date.today )
+    Todo.generate_weekly(@family.id, task.id, Date.today + 7.days )
   end
 
   def generate_daily_tasks(task)
-    Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week_and_day(@family.id, task.id, @ts_params[:y], @ts_params[:m], @ts_params[:w], @ts_params[:d] )
+    first_day = get_first_day(Date.today)
+    range = (0.upto 13)
+    
+    range.each do | d | 
+      this_day = first_day + d.days
+      Todo.generate_daily(@family.id, task.id, this_day)
+    end
   end
+  
+
   def ts_params
   	@ts_params
   end

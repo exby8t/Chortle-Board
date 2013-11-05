@@ -9,15 +9,40 @@ require 'rspec/autorun'
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
-  # ## Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
+  
+config.before(:all) do 
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+    @family =  FactoryGirl.create(:family, {name: "test fam"})
+    @cat1 =    FactoryGirl.create(:category, {name: "monthly"})
+    @cat2 =    FactoryGirl.create(:category, {name: "weekly"})
+    
+    @i_m =     FactoryGirl.create(:interval, {name: "Monthly"})
+    @i_w =     FactoryGirl.create(:interval, {name: "Weekly"})
+    @i_d =     FactoryGirl.create(:interval, {name: "Daily"})
+
+    @task1 =   FactoryGirl.create(:task, {name: "monthly task", interval_id: @i_m.id, category_id: @cat1.id})
+    @task2 =   FactoryGirl.create(:task, {name: "first weekly task", interval_id: @i_w.id, category_id: @cat2.id})
+    @task3 =   FactoryGirl.create(:task, {name: "second weekly task", interval_id: @i_w.id, category_id: @cat2.id})
+    @task4 =   FactoryGirl.create(:task, {name: "daily task", interval_id: @i_d.id, category_id: @cat2.id})
+  end
+
+  config.after(:all) do
+    @cat1.destroy
+    @cat2.destroy
+
+    @i_m.destroy
+    @i_w.destroy
+    @i_d.destroy
+
+    @task1.destroy
+    @task2.destroy
+    @task3.destroy
+    @task4.destroy
+
+    @family.destroy
+
+  end
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
