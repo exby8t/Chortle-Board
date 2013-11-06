@@ -1,5 +1,104 @@
+<div id="current-points">
+  <span id="current-points-number"></span>
+</div>
+
+
 <h1>Chorizo</h1>
 
-<p>Make being responsible easy</p>
 
-<p>Kids, I'm looking at you!</p>
+
+<div class="row">
+	<div class="span6 well">
+		<h2>Ah, Come on!</h2>
+		<% @incompleted_todos.each do | todo | %>
+	    <div id="<%= todo.id %>" class="span5 todo-box " week="<%= todo.week %>">
+
+		<p>
+			<%=raw todo_checkbox todo, {:action => 'completion'} %>
+			<%= todo.task.name %> | 
+			<%= todo.completed? %>
+		</p>
+		</div>		
+		<% end %>
+	</div>
+
+
+	<div class="span5 well">
+		<h2>Good Job!</h2>
+
+		<% @completed_todos.each do | todo | %>
+		
+		    <div id="<%= todo.id %>" class="span5 todo-box " week="<%= todo.week %>">
+
+			<p>
+			<%=raw todo_checkbox todo, {:action => 'completion'} %>
+			<%= todo.task.name %> | 
+			<%= todo.completed? %>
+			</p>
+		</div>
+		<% end %>
+
+
+	</div>
+
+</div>
+
+
+
+
+<script>
+  
+  $(document).ready(function(){
+    $('input').change(function(){
+        var endpoint = 'http://localhost:3000/todos';
+        var url = endpoint
+        var is_checked = $(this).is(':checked');
+        var action = 'incomplete';
+        var id = $(this).val();
+
+        if( is_checked){
+          var action = 'complete';
+        }
+
+        var member_id = <%= session[:member][:id] %>
+
+        url = endpoint + '/' + id + '/' + action + '/' + member_id;
+        
+        console.log('send to ' + url) ;
+
+        $.ajax(
+            {
+              url:url,
+              //type: "POST",
+              //contentType:"application/json; charset=utf-8",
+              //dataType:"json",
+              
+              success:function(result){
+                calculate_points();
+                },
+              error:function(result){
+              	console.log(result)
+              }
+
+          });
+
+
+    })
+
+
+      
+      function calculate_points(){
+        var totes = 0;
+        $('span#current-points-number').text(totes);
+        
+        $('input.completion-checkbox:checked').each(function(){
+          totes = totes +  $(this).attr('points') * 1;
+          //console.log(totes)
+          $('span#current-points-number').text(totes);
+        })
+      }
+
+      calculate_points();
+  })
+
+</script>

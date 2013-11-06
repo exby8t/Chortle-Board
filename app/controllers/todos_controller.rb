@@ -5,17 +5,10 @@ class TodosController < ApplicationController
   def assign
     @todo = Todo.find(params[:id])
     @todo.member_id = params[:member_id]
+    puts @todo
+    puts "~~~~~~~~~~ save!"
     @todo.save
-
-    respond_to do |format|
-        if @todo.save
-          format.html { redirect_to @todo, notice: 'Todo was successfully assigned.' }
-          format.json { render json: @todo, status: :created, location: @todo }
-        else
-          format.html { render action: "update" }
-          format.json { render json: @todo.errors, status: :unprocessable_entity }
-        end
-      end    
+    render json: @todo
   end
 
   def unassign
@@ -25,15 +18,26 @@ class TodosController < ApplicationController
 
     puts "unsassigned user"
 
-    respond_to do |format|
-        if @todo.save
-          format.html { redirect_to @todo, notice: 'Todo was successfully unassigned.' }
-          format.json { render json: @todo, status: :created, location: @todo }
-        else
-          format.html { render action: "update" }
-          format.json { render json: @todo.errors, status: :unprocessable_entity }
-        end
-      end    
+    render json: @todo
+      
+  end
+
+
+def complete
+    @todo = Todo.find_by_id_and_member_id(params[:id], params[:member_id])
+    puts @todo
+    @todo.is_completed = true
+    @todo.save
+
+    render json: @todo
+end
+
+def incomplete
+    @todo = Todo.find_by_id_and_member_id(params[:id], params[:member_id])
+    @todo.is_completed = nil
+    @todo.save
+
+    render json: @todo
   end
 
 
@@ -50,8 +54,8 @@ class TodosController < ApplicationController
 
     #generate missing todos from tasks
     @family = Family.find(session[:member][:family][:id])
-    @scheduler = Scheduler.new(@family)
-    @scheduler.generate_todos(Date.today)
+    #@scheduler = Scheduler.new(@family)
+    #@scheduler.generate_todos(Date.today)
     @week = Date.today.cweek
 
 

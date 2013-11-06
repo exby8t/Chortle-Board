@@ -1,18 +1,30 @@
 require 'date'
 
 class Todo < ActiveRecord::Base
+
+  attr_accessible :day, :is_completed, :month, :week, :year
+  
   belongs_to :member
   belongs_to :task
   belongs_to :family
-  attr_accessible :day, :is_completed, :month, :week, :year
 
   default_scope { order(:year, :month, :week, :day)}
+
+  scope :completed, -> { where(is_completed: true)}
+  scope :incompleted, -> {  where(is_completed: nil)}
+
+
   def assigned?
     if member.nil?
       false 
     else
       true
     end
+  end
+
+
+  def completed?
+    is_completed
   end
 
   def due_on

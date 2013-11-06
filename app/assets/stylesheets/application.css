@@ -11,3 +11,29 @@
  *= require_self
  *= require_tree .
  */
+
+ div#current-points{
+    float:right;
+    width:200px;
+    padding:20px;
+    text-align: center;
+    background-color: #ececec;
+  }
+
+  .todo-title{font-weight: bold; font-size: 20px; margin-bottom:0px;}
+
+  .todo-title input[type='checkbox']:checked {
+    background: #abd;
+}
+
+
+  .todo-title input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    
+    border-radius:5px;
+    border:2px solid #555;
+    margin-top:0px;
+}
+  .todo-details{font-style: italic;margin-left:20px;}

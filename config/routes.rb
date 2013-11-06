@@ -1,5 +1,6 @@
 ChoreBoardApp::Application.routes.draw do
 
+  root :to => 'home#index'
   get "home/index"
   get "home/about"
 
@@ -28,8 +29,10 @@ ChoreBoardApp::Application.routes.draw do
   match '/todos/:id/assign/:member_id' => 'todos#assign', :as => :assign_todo
   match '/todos/:id/unassign/:member_id' => 'todos#unassign', :as => :unassign_todo
 
+    match '/todos/:id/complete/:member_id' => 'todos#complete', :as => :complete_todo
+  match '/todos/:id/incomplete/:member_id' => 'todos#incomplete', :as => :incomplete_todo
 
-  root :to => 'home#index'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

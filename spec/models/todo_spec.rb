@@ -16,6 +16,19 @@ describe Todo do
     member.destroy
   end
 
+  it "has a completed and incompleted scope" do 
+
+    FactoryGirl.create(:todo, {:is_completed => true})
+    FactoryGirl.create(:todo)
+    FactoryGirl.create(:todo)
+
+    expect(Todo.completed.count).to eq 1
+    expect(Todo.incompleted.count).to eq 2
+    pp Todo.incompleted
+    Todo.destroy_all
+
+  end
+
 
   
 
