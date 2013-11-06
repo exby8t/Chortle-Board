@@ -1,5 +1,12 @@
 .skinny{width:100px;}
 
+.navbar .brand {
+	text-shadow: none;
+	font-size: 1.6em;
+	font-weight: bold;
+	}
+
+
 select{width:220px;}	
 select.skinny{width:100px;}	
 

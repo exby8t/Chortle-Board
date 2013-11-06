@@ -1,4 +1,4 @@
-class TodosController < ApplicationController
+class TodosController < ProtectedController
   # GET /todos
   # GET /todos.json
 

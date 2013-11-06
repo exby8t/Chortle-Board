@@ -1,43 +1,72 @@
+<div class="row-fluid">
+  <div class="span8">
+    <h1>Todos for this Week</h1>
+  </div>
 
-<div id="current-points">
-  <span id="current-points-number"></span>
+  <div id="current-points" class="span3 pull-right">
+     <span id="current-points-number"></span> points
+  </div>
 </div>
 
-<h1>All Todos Up for Grabs!!!</h1>
+
+<div class="row-fluid">
+<div id="action-box" class="span12">
+    
+    <div class="action-alter pull-right">
+        <button id="show-available" class="btn">Show Available Only</button>
+        <button id="show-all" class="btn">Show All</button>
+    </div>
+
+
+</div>
+</div>
+
+
+
+
+
 
 <% @todos.keys.each do | key | %>
+<div class="row-fluid">
 <div class="span12 well">
-    <h2>This <%= key.capitalize %></h2>
+    <h2>By the <%= key.capitalize %></h2>
     
     <% @todos[key].each do | todo | %>
     
     <div id="<%= todo.id %>" class="span5 todo-box <%= key %>" week="<%= todo.week %>">
 
       <p class="todo-title">
-      
        <%=raw todo_checkbox(todo) %>
        <%= todo.task.name %>
-       <%= todo.assigned? %>
-        </p>
+      </p>
        
-        <p class="todo-details">
-          Worth <%= todo.task.points %> points<br/>
-          Due on <%= todo.due_on.strftime("%A %m/%d/%Y") %>
-        </p>
+      <p class="todo-details">
+        Worth <%= todo.task.points %> points<br/>
+        Due on <%= todo.due_on.strftime("%A %m/%d/%Y") %>
+      </p>
 
     </div>
 
       
     <% end %>
 </div>
+</div>
 <% end %>
-
 
 
 
 <script>
   
   $(document).ready(function(){
+    
+    $('button#show-available').click(function(){
+        $('input:checked').closest('div.todo-box').fadeOut();
+    });
+
+    $('button#show-all').click(function(){
+        $('input:checked').closest('div.todo-box').fadeIn();
+    });
+
     $('input').change(function(){
         var endpoint = 'http://localhost:3000/todos';
         var url = endpoint

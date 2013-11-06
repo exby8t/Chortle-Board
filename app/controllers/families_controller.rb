@@ -1,4 +1,4 @@
-class FamiliesController < ApplicationController
+class FamiliesController < ProtectedController
   # GET /families
   # GET /families.json
   def index

@@ -1,30 +1,47 @@
-<div id="current-points">
-  <span id="current-points-number"></span>
+
+<div id="page-header" class="row-fluid">
+
+  <div id="current-points" class="span3">
+    <span id="current-points-number"></span> / <%= @member.quota %>
+  </div>
+
+
+  <div class="span9">
+    <h1><%= @member.first_name %>'s Todos for this week</h1>
+  </div>
+
 </div>
 
 
-<h1>Chorizo</h1>
 
 
+<div class="row-fluid">
 
-<div class="row">
 	<div class="span6 well">
-		<h2>Ah, Come on!</h2>
+		<h2>Tasks Needing Doin'</h2>
 		<% @incompleted_todos.each do | todo | %>
 	    <div id="<%= todo.id %>" class="span5 todo-box " week="<%= todo.week %>">
 
-		<p>
+		<p class="todo-title">
 			<%=raw todo_checkbox todo, {:action => 'completion'} %>
-			<%= todo.task.name %> | 
-			<%= todo.completed? %>
-		</p>
+      <%= todo.task.name %><br/>
+    </p>
+    <p class="todo-details">
+      <% if todo.due_today? %>
+        <span class="due-today">Due Now!</span>
+      <% end %>
+  
+  		<%= todo.due_on_as_text %> for <%= todo.task.points %> points
+	
+  	</p>
+
 		</div>		
 		<% end %>
 	</div>
 
 
-	<div class="span5 well">
-		<h2>Good Job!</h2>
+	<div class="span6 well">
+		<h2>Tasks Done!</h2>
 
 		<% @completed_todos.each do | todo | %>
 		
@@ -32,8 +49,8 @@
 
 			<p>
 			<%=raw todo_checkbox todo, {:action => 'completion'} %>
-			<%= todo.task.name %> | 
-			<%= todo.completed? %>
+			<%= todo.task.name %> completed  
+			for <%= todo.task.points %> points...
 			</p>
 		</div>
 		<% end %>

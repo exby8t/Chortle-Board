@@ -24,7 +24,7 @@ class LoginController < ApplicationController
       session[:member][:name] = @member.first_name
       session[:member][:family] = {:id => @member.family.id, :name => @member.family.name}
 
-      redirect_to family_todos_path(@member.family)
+      redirect_to home_path
       
     else
 

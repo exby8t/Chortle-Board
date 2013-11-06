@@ -19,7 +19,7 @@ else
 end
 	html = "
 	<input  
-            class='#{data[:action]}-checkbox'
+            class='#{data[:action]}-checkbox fat-checkbox'
             type='checkbox' 
             name='todo[id]' 
             value='#{todo.id}' 

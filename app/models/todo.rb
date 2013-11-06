@@ -27,6 +27,24 @@ class Todo < ActiveRecord::Base
     is_completed
   end
 
+  def due_on_as_text
+    #monthly
+    unless day.nil?
+     "Do it on this #{due_on.strftime('%A')} "
+    #daily
+    else
+      "Do it by this #{due_on.strftime('%A')} "
+    end
+
+  end
+  def due_today?
+    if due_on == Date.today
+      true
+    else
+      false
+    end
+  end
+  
   def due_on
     #monthly
     if week.nil?

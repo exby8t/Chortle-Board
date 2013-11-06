@@ -2,14 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Chorizo Chore Board</title>
+    <title>Chortle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "main", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstraps/bootstrap.min", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstraps/bootstrap-override", :media => "all" %>
+  <%= stylesheet_link_tag    "bootstraps/bootstrap-responsive.min", :media => "all" %>
+  <%= stylesheet_link_tag    "main", :media => "all" %>
+  <%= stylesheet_link_tag    "main-responsive", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
@@ -27,40 +32,32 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-       <a class="brand" href="/">Chore Board</a>
+       <a class="brand" href="/">Chortle << Boards </a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
-         
-          <li><a id="home-link" href="/">Home</a></li>
-          
-
-
-              <!-- render 'global/country_menu' -->
-              <!-- render 'global/history_menu' -->
-
-
+            
+            <!-- left menu items -->         
 
         </ul>
+
         <ul class="nav pull-right" id="main-menu-right">
 
-
+            <li><%= link_to "My Todos", home_path %></li>
           
-     <!-- render 'global/manage_menu' -->
-
-
-          <li>
             <% if session[:member] %>
-<a rel="tooltip" href="<%= logout_path %>" title="Logout" >Logout
-               <i class="icon-share-alt"></i>
-             </a>
+              <li><%= link_to "Available Tasks", family_todos_path(@family) %></li>
+              <li><%= link_to "Manage Tasks", family_tasks_path(@family) %></li>
+
+              <li><a rel="tooltip" href="<%= logout_path %>" title="Logout" >Logout
+                <i class="icon-share-alt"></i>
+             </a></li>
+
             <% else %>
-<a rel="tooltip" href="<%= login_path %>" title="Login to manage" >Login
+               <li><a rel="tooltip" href="<%= login_path %>" title="Login to manage" >Login
                <i class="icon-share-alt"></i>
-             </a>
+             </a></li>
             <% end %>
-            
-           </li>
-          
+
         </ul>
        </div>
      </div>
@@ -105,14 +102,20 @@
 
       <footer id="footer">
        
-        Made by <a href="#">Multiplied by Infinity</a>. 
+        Devleoped by <a href="#">Multiplied by Infinity</a>. 
 
+        <% if session[:member] %>
+          
+        <% end %>  
+      <div id="debug">  
       <% if session[:member] %>
+        
+
         <%= debug session[:member] %>
       <% end %>
 
       <%= debug params %>
-        
+       </div> 
       </footer>
 
     </div><!-- /container -->

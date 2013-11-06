@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < ProtectedController
   
   before_filter :get_member
 

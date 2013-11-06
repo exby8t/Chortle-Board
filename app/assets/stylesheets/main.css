@@ -1,4 +1,67 @@
-body{font-size: 1.2em}
+body{
+  font-size: 1.2em;
+  padding-top: 60px
+}
+
+div#action-box{float:left; margin: 5px 0px 5px 0px;}
+
+h1{
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.7em;
+  margin: -5px 0px 15px 0px;
+  color: #2c3e50;
+  }
+
+
+div#page-header{margin-bottom:20px; }
+
+
+div#current-points{
+    float:right;
+    width:200px;
+    border-radius: 6px; 
+    padding:20px;
+    text-align: center;
+    background-color: #ececec;
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .todo-title{font-weight: bold; font-size: 20px; margin-bottom:0px;}
+
+  input.fat-checkbox[type='checkbox']:checked {
+    background-color: #80b5e9;
+}
+
+
+  input[type='checkbox'].fat-checkbox {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    
+    border-radius:5px;
+    border:2px solid #5a6269;
+    margin-top:0px;
+    background-color: #fff
+}
+  .todo-details{font-style: italic;margin-left:20px;}
+
+
+
+span.due-today{
+  float:left; 
+  text-align:center;
+  color:#80b5e9; 
+  background-color: #fff; 
+  border:thin solid #80b5e9;
+  padding:4px; 
+  border-radius:4px; 
+  margin:5px 5px 2px 0px;}
+
 
 table{
 	min-width: 60%; border-radius: 6px; border: thin solid #85919c;

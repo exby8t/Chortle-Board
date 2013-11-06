@@ -1,8 +1,8 @@
 <h1>Family Members</h1>
 
-
+<div class="row">
 <% @members.each do |member| %>
-    <div class="member-profile">  
+    <div class="member-profile well span5">  
     <h3><%= member.first_name %>
     <%= member.last_name %>
     </h3>
@@ -12,7 +12,10 @@
         Birthdate: <%= member.birthdate %><br />
         Family: <%= member.family %><br />
         Type: <%= member.member_type %><br />
+        This weeks quota: <%= member.quota %><br />
+        Points needed: <%= member.needed_points %><br />
     </p>
+    
         <div class="actions">
             <%= link_to 'View', family_member_path(member.family.slug, member), :class => "btn btn-small" %>
             <%= link_to 'Update', edit_family_member_path(member.family.slug, member), :class => "btn btn-small"%>
@@ -20,7 +23,7 @@
         </div>
     </div>
 <% end %>
-
+</div>
 
 <br />
 
