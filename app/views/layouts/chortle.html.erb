@@ -32,7 +32,9 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-       <a class="brand" href="/">Chortle << Boards </a>
+
+       <a class="brand" href="/">
+        Chortle << Boards </a>
        <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left">
             
@@ -92,9 +94,19 @@
 </header>
 
     <% if flash[:notice] %>
+    <div class="row-fluid">
       <div class="alert alert-success span12">
         <%= flash[:notice] %>
       </div>
+    </div>
+    <% end %>
+
+    <% if flash[:error] %>
+    <div class="row-fluid">
+      <div class="alert alert-danger span12">
+        <%= flash[:error] %>
+      </div>
+    </div>
     <% end %>
 
 

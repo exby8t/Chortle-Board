@@ -9,6 +9,7 @@ class LoginController < ApplicationController
 
     
     if @member
+
       session[:member] = {}
       session[:member][:id] = @member.id
       session[:member][:name] = @member.first_name
@@ -45,6 +46,7 @@ class LoginController < ApplicationController
 
     
     if @member
+      flash[:notice] = "You have been logged in!"
       session[:member] = {}
       session[:member][:id] = @member.id
       session[:member][:name] = @member.first_name
@@ -57,7 +59,7 @@ class LoginController < ApplicationController
       redirect_to home_path
       
     else
-
+      flash[:error] = "Username does not match!"
       flash[:message] = "User not found."
       redirect_to login_path
     end

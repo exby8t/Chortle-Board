@@ -2,26 +2,36 @@
 
 
 
-
-<%= form_tag process_login_path do |f| %>
-
- <div class="field">
-    <%= label_tag :email %>
-    <%= text_field_tag :email %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
-  </div>
-
-  <div class="actions">
-    <%= submit_tag "Login", :class => "btn btn-primary action-button" %>
-
-    <%= link_to "Login With Google", "/auth/google", :class => "btn btn-primary action-button" %>
+  <%= image_tag("sign-in-with-chortle.png", :width => 200, :id => 'chortle-btn') %>
+  <%= link_to image_tag("sign-in-with-google.png", :width => 200), "/auth/google" %>
   
+<div id="login-form" style="display:none">
 
-  </div>
+  <%= form_tag process_login_path do |f| %>
+
+   <div class="field">
+      <%= label_tag :email %>
+      <%= text_field_tag :email %>
+    </div>
+    <div class="field">
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </div>
+
+    <div class="actions">
+      <%= submit_tag "Login", :class => "btn btn-primary action-button" %>
+    </div>
 
 
+  <% end %>
+</div>
 
-<% end %>
+
+<script>
+
+  $(document).ready(function(){
+    $('img#chortle-btn').click(function(){
+      $('div#login-form').fadeIn();
+    })
+  })
+</script>
