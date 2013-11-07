@@ -44,10 +44,15 @@
     <%= f.collection_select :member_type_id, MemberType.all, :id, :name %>
   </div>
 
+  <div class="field">
+    <%= f.check_box :is_admin %>
+    <%= f.label :is_admin, "This member is a family admin" , :class => 'inline' %>
+  </div>
+
   <%= f.hidden_field :family_id, :value => @member.family.id  %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
 <%= debug @member %>

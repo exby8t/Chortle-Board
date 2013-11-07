@@ -1,6 +1,7 @@
 class IntervalsController < ApplicationController
   # GET /intervals
   # GET /intervals.json
+  before_filter :require_admin_login
   def index
     @intervals = Interval.all
 

@@ -7,7 +7,11 @@ class Member < ActiveRecord::Base
   belongs_to :member_type
   has_many :todos
 
-  attr_accessible :birthdate, :email, :first_name, :last_name, :password, :family_id, :member_type_id, :required_points
+  attr_accessible :birthdate, :email, :first_name, :last_name, :password, :family_id, :member_type_id, :required_points, :is_admin
+
+  def admin?
+    is_admin
+  end
 
   def full_name
   	"#{first_name} #{last_name}"

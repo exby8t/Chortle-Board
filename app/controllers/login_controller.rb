@@ -14,7 +14,6 @@ class LoginController < ApplicationController
   def authenticate
   
     @member = Member.find_by_email_and_password(params[:email], params[:password])
-    #@owner = Owner.find_authenticated(params[:netid], params[:password])
     #puts "checking #{params[:netid]} abd #{params[:password]} == #{@owner.nil?}"
 
     
@@ -24,6 +23,10 @@ class LoginController < ApplicationController
       session[:member][:name] = @member.first_name
       session[:member][:family] = {:id => @member.family.id, :name => @member.family.name}
 
+      if @member.admin?
+        session[:member][:admin] = true
+      end
+      
       redirect_to home_path
       
     else

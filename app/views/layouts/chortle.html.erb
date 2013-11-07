@@ -42,11 +42,15 @@
 
         <ul class="nav pull-right" id="main-menu-right">
 
-            <li><%= link_to "My Todos", home_path %></li>
-          
-            <% if session[:member] && @family%>
-              <li><%= link_to "Available Tasks", family_todos_path(@family) %></li>
-              <li><%= link_to "Manage Tasks", family_tasks_path(@family) %></li>
+            <% if session[:member] %>
+
+             <li><%= link_to "My Todos", home_path %></li>
+             <li><%= link_to "Available Tasks", family_todos_path(@family) %></li>
+             
+             <% if session[:member][:admin] %>
+             <li><%= link_to "Admin Panel", admin_home_path %></li>
+             <li><%= link_to "Manage Tasks", family_tasks_path(@family) %></li>
+             <% end %>
 
               <li><a rel="tooltip" href="<%= logout_path %>" title="Logout" >Logout
                 <i class="icon-share-alt"></i>

@@ -14,7 +14,7 @@ class ProtectedController < ApplicationController
 	end
 
 	def require_admin_login
-		unless session[:admin]
+		unless session[:member][:admin]
 			redirect_to login_path
 		end
 	end

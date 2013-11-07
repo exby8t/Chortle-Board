@@ -1,6 +1,8 @@
 class FamiliesController < ProtectedController
   # GET /families
   # GET /families.json
+  before_filter :require_admin_login
+
   def index
     @families = Family.all
 

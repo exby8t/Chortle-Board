@@ -1,5 +1,7 @@
 ChoreBoardApp::Application.routes.draw do
 
+  get "/panel" => 'admin_panel#index', :as => :admin_home
+
   root :to => 'home#index'
   
   get "home/index", :as => :home

@@ -1,6 +1,7 @@
 class MembersController < ProtectedController
   # GET /members
   # GET /members.json
+  before_filter :require_admin_login
   def index
     if params.has_key? :family_id
       @members = Family.find(params[:family_id]).members

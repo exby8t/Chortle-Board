@@ -1,6 +1,8 @@
 class TasksController < ProtectedController
   # GET /tasks
   # GET /tasks.json
+  before_filter :require_admin_login
+  
   def index
     if session[:member]
       @tasks = Family.find(session[:member][:family][:id]).tasks

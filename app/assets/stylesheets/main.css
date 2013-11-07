@@ -55,7 +55,7 @@ div#current-points{
   .todo-details{font-style: italic;margin-left:20px;}
 
 
-
+label.inline{display:inline-block;}
 span.due-today{
   float:left; 
   text-align:center;

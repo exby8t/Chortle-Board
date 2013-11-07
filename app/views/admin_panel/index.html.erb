@@ -1,0 +1,28 @@
+<h1>Administrator Control Panel</h1>
+
+<div class="row-fluid">
+	<div class="well span4">
+		<h2>Manage the System</h2>
+
+		<ul>
+			<li><%= link_to "Families", families_path %>
+			<li><%= link_to "Categories", categories_path %>
+			<li><%= link_to "Member Types", member_types_path %>
+			<li><%= link_to "Families", families_path %>
+			
+		</ul>
+	</div>
+	<div class="well span4">
+		<h2>Family Members</h2>
+		<ul>
+		<% @families.each do | family | %>
+			<li><%= link_to family.name, family_members_path(family ) %></li>
+		<% end %>
+		</ul>
+	</div>
+	<div class="well span4">
+		<h2>Stats</h2>
+
+		<p><%= @total_todos %> total todos!</p>
+	</div>
+</div>

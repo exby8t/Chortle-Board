@@ -1,6 +1,7 @@
-class MemberTypesController < ApplicationController
+class MemberTypesController < ProtectedController
   # GET /member_types
   # GET /member_types.json
+  before_filter :require_admin_login
   def index
     @member_types = MemberType.all
 
