@@ -21,7 +21,7 @@ class SystemController < ApplicationController
 
   def send_status
     @messages = []
-    members = Member.find_all_by_first_name_and_last_name('Jonathan', 'Arp')
+    members = Member.all
     
     members.each do | member | 
       
