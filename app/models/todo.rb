@@ -58,7 +58,7 @@ class Todo < ActiveRecord::Base
   def due_on
     #monthly
     if week.nil?
-      Date.parse("30/#{month}/#{year}")
+      Todo.last_sunday_of_month(month,year)
     #weekly
     elsif day.nil?
       Date.parse("#{Todo.last_day_of_week(week)}/#{month}/#{year}")
@@ -83,15 +83,25 @@ class Todo < ActiveRecord::Base
   def self.generate_daily(family_id, task_id, today)
 	Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week_and_day(family_id, task_id, today.year, today.month, today.cweek, today.mday )
   end
+
+
   #TODO: move this to a separate class
   def self.first_day_of_week(cweek)
-    Date.commercial(Date.today.year, cweek, 1) - 1.day
+    Date.commercial(Date.today.year, cweek, 1)
   end
 
   def self.last_day_of_week(cweek)
-    Date.commercial(Date.today.year, cweek, 6)
+    Date.commercial(Date.today.year, cweek, 6) + 1.day
   end
 
-
+  def self.last_sunday_of_month(month,year)
+    first_day = Date.parse("1/#{month}/#{year}")
+    
+    last_day = first_day + 1.month - 1.day
+    my_days = [0]
+    result = (first_day..last_day).to_a.select {|k| my_days.include?(k.wday)}    
+    puts "last day is #{result.last}"
+    result.last
+  end
 
 end

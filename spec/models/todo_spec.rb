@@ -16,11 +16,27 @@ describe Todo do
     member.destroy
   end
 
+  it "has a class method that determines the last sunday of the month" do 
+      expect(Todo.last_day_of_week(45)).to eq Date.parse("10/11/2013")
+
+  end
+
+  it "is due on Sunday if it's a monthly or weekly task" do
+    todo_m = FactoryGirl.build(:todo, {week: nil, day:nil} )
+    todo_w = FactoryGirl.build(:todo, { day:nil} )
+    expect(todo_m.due_on.wday).to eq 0
+    expect(todo_w.due_on.wday).to eq 0
+
+
+  end
+
   it "has a completed and incompleted scope" do 
 
     FactoryGirl.create(:todo, {:is_completed => true})
-    FactoryGirl.create(:todo)
-    FactoryGirl.create(:todo)
+    FactoryGirl.create(:todo, {:is_completed => nil})
+    FactoryGirl.create(:todo, {:is_completed => nil})
+
+    
 
     expect(Todo.completed.count).to eq 1
     expect(Todo.incompleted.count).to eq 2
@@ -28,21 +44,6 @@ describe Todo do
     Todo.destroy_all
 
   end
-
-
-  
-
-
-
-  it "can tell the first day of a week" do 
-    expect(Todo.first_day_of_week(45)).to eq Date.parse("3/11/2013")
-  end
-
-
-  it "can tell the last day of a week" do 
-    expect(Todo.last_day_of_week(45)).to eq Date.parse("9/11/2013")
-  end
-
   
   
   it "will display a due date for a daily task" do 
@@ -51,23 +52,39 @@ describe Todo do
   end
 
 
-it "will display a due date for a weekly task" do 
+it "will display a due date for a weekly task on sunday" do 
     
     weekly_todo = FactoryGirl.build(:todo, {:year => 2013, :month => 11, :week => 45, :day => nil})
-    expect(weekly_todo.due_on).to eq Date.parse("9/11/2013")
+    expect(weekly_todo.due_on).to eq Date.parse("10/11/2013")
     
   end
 
 
   it "will display a due date  for a monthly task" do 
     monthly_todo = FactoryGirl.build(:todo, {:day => nil, :week => nil, :month => 11, :year => 2013})
-    expect(monthly_todo.due_on).to eq Date.parse("30/11/2013")
+    expect(monthly_todo.due_on).to eq Date.parse("24/11/2013")
 
   end
 
 
 
-  
+# CLASS METHODS!!!!
+
+
+  it "can tell the first day of a week is a monday" do 
+    expect(Todo.first_day_of_week(45)).to eq Date.parse("4/11/2013")
+  end
+
+
+  it "can tell the last day of a week is a sunday" do 
+    expect(Todo.last_day_of_week(45)).to eq Date.parse("10/11/2013")
+  end
+
+  it "has a class method that determines the last sunday of the month" do 
+      expect(Todo.last_sunday_of_month(11, 2013)).to eq Date.parse("24/11/2013")
+
+  end
+
   it 'generates monthly tasks' do  
   	totes = Todo.all.count
 	wat = Todo.generate_monthly(@family.id, @task1.id, Date.today)
