@@ -1,6 +1,7 @@
 ChoreBoardApp::Application.routes.draw do
 
 
+  get '/auth/google'
   get '/auth/:provider/callback', to: 'login#callback'
 
   get "system/index"
