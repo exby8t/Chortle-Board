@@ -103,19 +103,19 @@
       <footer id="footer">
        
         Devleoped by <a href="#">Multiplied by Infinity</a>. 
+      <% if param.has_key? :debug %>
+      
+          <div id="debug">  
+          <% if session[:member] %>
+            
 
-        <% if session[:member] %>
-          
-        <% end %>  
-      <div id="debug">  
-      <% if session[:member] %>
-        
+            <%= debug session[:member] %>
+          <% end %>
 
-        <%= debug session[:member] %>
-      <% end %>
+          <%= debug params %>
+           </div> 
 
-      <%= debug params %>
-       </div> 
+    <% end %>  
       </footer>
 
     </div><!-- /container -->
