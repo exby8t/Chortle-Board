@@ -1,7 +1,31 @@
 class LoginController < ApplicationController
 
   def callback
-    render json: params
+
+    render json: request.env["omniauth.auth"]
+=begin    
+    @member = Member.find_by_email(params[:email])
+    #puts "checking #{params[:netid]} abd #{params[:password]} == #{@owner.nil?}"
+
+    
+    if @member
+      session[:member] = {}
+      session[:member][:id] = @member.id
+      session[:member][:name] = @member.first_name
+      session[:member][:family] = {:id => @member.family.id, :name => @member.family.name}
+
+      if @member.admin?
+        session[:member][:admin] = true
+      end
+      
+      redirect_to home_path
+      
+    else
+
+      flash[:message] = "User not found."
+      redirect_to login_path
+    end
+=end
   end
   
   def index
