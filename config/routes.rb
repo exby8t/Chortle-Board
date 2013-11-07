@@ -1,5 +1,8 @@
 ChoreBoardApp::Application.routes.draw do
 
+
+  get '/auth/google/callback' => 'login#callback'
+
   get "system/index"
   get "system/ping"
   get "system/send_reminder"

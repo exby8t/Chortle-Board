@@ -1,5 +1,8 @@
 class LoginController < ApplicationController
 
+  def callback
+    render json: params
+  end
   
   def index
   end
