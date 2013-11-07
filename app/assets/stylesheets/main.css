@@ -1,7 +1,16 @@
-body{
+body {
   font-size: 1.2em;
-  padding-top: 60px
-}
+  padding-top: 60px;
+  background-image: url('/assets/c-fade.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  }
+
+.well
+  {
+  opacity:0.8;
+  filter:alpha(opacity=40); /* For IE8 and earlier */
+  }
 
 .sign-in{border-radius: 3px;}
 
