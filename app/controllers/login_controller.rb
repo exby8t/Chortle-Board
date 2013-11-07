@@ -2,7 +2,7 @@ class LoginController < ApplicationController
 
   def callback
 
-    render json: request.env["omniauth.auth"]
+    render json: request.env["omniauth.auth"][:info][:email]
 =begin    
     @member = Member.find_by_email(params[:email])
     #puts "checking #{params[:netid]} abd #{params[:password]} == #{@owner.nil?}"
