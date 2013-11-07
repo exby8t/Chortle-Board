@@ -6,6 +6,12 @@ class SystemController < ApplicationController
 
   end
 
+  def send_test
+    TestMailer.test_mail().deliver
+    render json: params
+  end
+
+
   def ping
     render json: "pong"
   end

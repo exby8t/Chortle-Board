@@ -1,14 +1,11 @@
 ChoreBoardApp::Application.routes.draw do
 
   get "system/index"
-
   get "system/ping"
-
   get "system/send_reminder"
-
   get "system/send_status"
-
   get "system/send_warning"
+  get "system/send_test"
 
   get "/panel" => 'admin_panel#index', :as => :admin_home
 
