@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem "friendly_id", "~> 4.0.10"  
+gem 'omniauth'
+gem "omniauth-google-oauth2"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
