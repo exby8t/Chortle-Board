@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Chortle Status Update</h1>
+    <p>Hello <%= @member.first_name %></p>
+    <p>
+      This is just a friendly reminder that you have some stuff to do
+    </p>
+    <ul>
+      <% @member.todos.incompleted.each do | todo | %>
+        <li>
+          <%= todo.task.name %></br>
+          <%= todo.due_on_as_text %> for <%= todo.task.points %> points
+           
+            <% if todo.due_today? %>
+              <br/>
+              <span class="due-today">Due Now!</span>
+            <% end %>
+
+        </li>
+      <% end %>
+    </ul>
+
+
+    <p>Your current stats</p>
+
+    <%= debug @member.current_stats %>
+
+    <p>You can log into <a href="http://chortle.heroku.com">Chortle App</a> to update your tasks.</p>
+
+
+    <p>Thanks, <br/>
+      Your friendly chortler</p>
+  </body>
+</html>

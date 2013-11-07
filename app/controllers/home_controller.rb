@@ -7,6 +7,10 @@ class HomeController < ProtectedController
   	@incompleted_todos = @member.todos.incompleted
   end
 
+  def stats
+   @stats =  @member.current_stats
+  end
+
   def about
   end
 

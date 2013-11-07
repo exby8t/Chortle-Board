@@ -13,6 +13,7 @@ ChoreBoardApp::Application.routes.draw do
   
   get "home/index", :as => :home
   get "home/about", :as => :about
+  get "home/stats", :as => :stats
   
   get '/login' => 'login#index', :as => :login
   post '/login' => 'login#authenticate', :as => :process_login

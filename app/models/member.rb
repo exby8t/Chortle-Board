@@ -25,6 +25,18 @@ class Member < ActiveRecord::Base
     current_points('quota')
   end
 
+  def current_stats 
+    stats = {
+      :quota => required_points,
+      :current_points => current_points,
+      :points_needed => (required_points - current_points),
+      :tasks_completed => todos.completed.count,
+      :tasks_incompleted => todos.incompleted.count
+    }
+
+    return stats
+  end
+
   def current_points(type = 'current')
   	year = Date.today.year
   	week = Date.today.cweek
