@@ -54,8 +54,8 @@ def incomplete
 
     #generate missing todos from tasks
     @family = Family.find(session[:member][:family][:id])
-    #@scheduler = Scheduler.new(@family)
-    #@scheduler.generate_todos(Date.today)
+    @scheduler = Scheduler.new(@family)
+    @scheduler.generate_todos(Date.today)
     @week = Date.today.cweek
 
 

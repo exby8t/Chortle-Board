@@ -4,6 +4,10 @@ ChoreBoardApp::Application.routes.draw do
   
   get "home/index", :as => :home
   get "home/about", :as => :about
+  
+  get '/login' => 'login#index', :as => :login
+  post '/login' => 'login#authenticate', :as => :process_login
+  get '/logout' => 'login#logout', :as => :logout
 
   resources :todos
   resources :tasks
@@ -25,9 +29,6 @@ ChoreBoardApp::Application.routes.draw do
   end
 
   get ":family_id/todos/list" => 'todos#list', :as => :family_todos_list
-  get '/login' => 'login#index', :as => :login
-  post '/login' => 'login#authenticate', :as => :process_login
-  get '/logout' => 'login#logout', :as => :logout
   match '/todos/:id/assign/:member_id' => 'todos#assign', :as => :assign_todo
   match '/todos/:id/unassign/:member_id' => 'todos#unassign', :as => :unassign_todo
 

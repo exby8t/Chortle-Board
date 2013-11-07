@@ -44,7 +44,7 @@
 
             <li><%= link_to "My Todos", home_path %></li>
           
-            <% if session[:member]  && nil %>
+            <% if session[:member] %>
               <li><%= link_to "Available Tasks", family_todos_path(@family) %></li>
               <li><%= link_to "Manage Tasks", family_tasks_path(@family) %></li>
 
