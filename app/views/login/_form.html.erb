@@ -2,8 +2,9 @@
 
 
 
-  <%= image_tag("sign-in-with-chortle.png", :width => 200, :id => 'chortle-btn') %>
-  <%= link_to image_tag("sign-in-with-google.png", :width => 200), "/auth/google" %>
+  <%= link_to image_tag("sign-in-with-google.png", :width => 200, :class => 'login-btn'), "/auth/google" %>
+  
+  <%= image_tag("sign-in-with-chortle.png", :width => 200, :id => 'chortle-btn', :class => 'login-btn') %>
   
 <div id="login-form" style="display:none">
 

@@ -1,10 +1,10 @@
 <div class="row-fluid">
-  <div class="span8">
+  <div class="span7">
     <h1>Todos for this Week</h1>
   </div>
 
-  <div id="current-points" class="span4 pull-right">
-     <span id="current-points-number"></span> / <%= @member.required_points %> points
+  <div id="current-points" class="span5 pull-right">
+     <span id="current-points-number"></span> / <%= @member.required_points %> pts
   </div>
 </div>
 
@@ -14,7 +14,7 @@
     
     <div class="action-alter pull-right">
         <button id="show-available" class="btn">Show Available Only</button>
-        <button id="show-all" class="btn">Show All</button>
+        <button id="show-all" class="btn" style="display:none">Show All</button>
     </div>
 
 
@@ -66,10 +66,15 @@
     
     $('button#show-available').click(function(){
         $('input:checked').closest('div.todo-box').fadeOut();
+        
+        $('button#show-available').hide()
+        $('button#show-all').fadeIn('slow');
     });
 
     $('button#show-all').click(function(){
         $('input:checked').closest('div.todo-box').fadeIn();
+        $('button#show-all').hide()
+        $('button#show-available').fadeIn('slow');
     });
 
     $('input').change(function(){
