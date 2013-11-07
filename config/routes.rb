@@ -1,7 +1,7 @@
 ChoreBoardApp::Application.routes.draw do
 
 
-  get '/auth/google/callback' => 'login#callback'
+  get '/auth/:provider/callback', to: 'login#callback'
 
   get "system/index"
   get "system/ping"
