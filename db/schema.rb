@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105174640) do
+ActiveRecord::Schema.define(:version => 20131107032616) do
 
   create_table "administrators", :force => true do |t|
     t.string   "email"
@@ -53,9 +53,10 @@ ActiveRecord::Schema.define(:version => 20131105174640) do
     t.date     "birthdate"
     t.integer  "family_id"
     t.integer  "member_type_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "slug"
+    t.integer  "required_points"
   end
 
   add_index "members", ["family_id"], :name => "index_members_on_family_id"

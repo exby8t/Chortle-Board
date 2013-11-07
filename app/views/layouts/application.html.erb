@@ -103,7 +103,11 @@
       <footer id="footer">
        
         Devleoped by <a href="#">Multiplied by Infinity</a>. 
-      <% if params.has_key? :debug %>
+      
+            <% if session[:member] %>
+            <p>Logged in as <%= session[:member][:name] %></p>
+            <% end %>
+        <% if params.has_key? :debug %>
       
           <div id="debug">  
           <% if session[:member] %>

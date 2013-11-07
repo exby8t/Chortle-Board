@@ -7,7 +7,7 @@ div#action-box{float:left; margin: 5px 0px 5px 0px;}
 
 h1{
   margin-bottom: 10px;
-}
+  }
 
 h2 {
   font-weight: 700;
@@ -22,7 +22,7 @@ div#page-header{margin-bottom:20px; }
 
 div#current-points{
     float:right;
-    width:200px;
+    
     border-radius: 6px; 
     padding:20px;
     text-align: center;
@@ -37,6 +37,10 @@ div#current-points{
     background-color: #80b5e9;
 }
 
+  input.fat-checkbox[type='checkbox']:disabled {
+    background-color: #ececec;
+    border:thin solid #ccc;
+  }
 
   input[type='checkbox'].fat-checkbox {
     -webkit-appearance:none;

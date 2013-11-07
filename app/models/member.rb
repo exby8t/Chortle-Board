@@ -1,13 +1,13 @@
 require 'date'
 
 class Member < ActiveRecord::Base
-  extend FriendlyId
-  friendly_id :full_name, use: :slugged
+  #extend FriendlyId
+  #friendly_id :full_name, use: :slugged
   belongs_to :family
   belongs_to :member_type
   has_many :todos
 
-  attr_accessible :birthdate, :email, :first_name, :last_name, :password, :family_id, :member_type_id
+  attr_accessible :birthdate, :email, :first_name, :last_name, :password, :family_id, :member_type_id, :required_points
 
   def full_name
   	"#{first_name} #{last_name}"

@@ -3,8 +3,8 @@
     <h1>Todos for this Week</h1>
   </div>
 
-  <div id="current-points" class="span3 pull-right">
-     <span id="current-points-number"></span> points
+  <div id="current-points" class="span4 pull-right">
+     <span id="current-points-number"></span> / <%= @member.required_points %> points
   </div>
 </div>
 
@@ -28,21 +28,26 @@
 
 <% @todos.keys.each do | key | %>
 <div class="row-fluid">
-<div class="span12 well">
+<div id="todo-list" class="span12 well">
     <h2>By the <%= key.capitalize %></h2>
     
     <% @todos[key].each do | todo | %>
     
-    <div id="<%= todo.id %>" class="span5 todo-box <%= key %>" week="<%= todo.week %>">
+    <div id="<%= todo.id %>" class="todo-box span5 <%= key %>" week="<%= todo.week %>">
 
       <p class="todo-title">
-       <%=raw todo_checkbox(todo) %>
+       <%=raw todo_checkbox(todo, {:action => "assignment", :owned => todo.owned?(session[:member][:id]) }) %>
        <%= todo.task.name %>
       </p>
        
       <p class="todo-details">
         Worth <%= todo.task.points %> points<br/>
-        Due on <%= todo.due_on.strftime("%A %m/%d/%Y") %>
+        Due on <%= todo.due_on.strftime("%A %m/%d/%Y") %><br/>
+        <% if todo.assigned? %>
+          Assigned to <%= todo.member.first_name %>
+          <% else %>
+          Unassigned
+        <% end %>
       </p>
 
     </div>
@@ -116,7 +121,7 @@
         var totes = 0;
         $('span#current-points-number').text(totes);
         
-        $('input.assignment-checkbox:checked').each(function(){
+        $('input.assignment-checkbox:checked').filter('.include').each(function(){
           totes = totes +  $(this).attr('points') * 1;
           //console.log(totes)
           $('span#current-points-number').text(totes);

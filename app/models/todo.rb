@@ -22,6 +22,16 @@ class Todo < ActiveRecord::Base
     end
   end
 
+  def owned? (member_id)
+    if member == nil
+      false 
+    elsif member.id == member_id
+      true
+    else
+      false
+    end
+  end
+
 
   def completed?
     is_completed

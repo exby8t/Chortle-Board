@@ -1,12 +1,12 @@
 
 <div id="page-header" class="row-fluid">
 
-  <div id="current-points" class="span3">
+  <div id="current-points" class="span4">
     <span id="current-points-number"></span> / <%= @member.quota %>
   </div>
 
 
-  <div class="span9">
+  <div class="span8">
     <h1><%= @member.first_name %>'s Todos for this week</h1>
   </div>
 
@@ -23,7 +23,7 @@
 	    <div id="<%= todo.id %>" class="span5 todo-box " week="<%= todo.week %>">
 
 		<p class="todo-title">
-			<%=raw todo_checkbox todo, {:action => 'completion'} %>
+			<%=raw todo_checkbox todo, {:action => 'completion', :owned => true} %>
       <%= todo.task.name %><br/>
     </p>
     <p class="todo-details">
@@ -48,7 +48,7 @@
 		    <div id="<%= todo.id %>" class="span5 todo-box " week="<%= todo.week %>">
 
 			<p>
-			<%=raw todo_checkbox todo, {:action => 'completion'} %>
+			<%=raw todo_checkbox todo, {:action => 'completion', :owned => true} %>
 			<%= todo.task.name %> completed  
 			for <%= todo.task.points %> points...
 			</p>

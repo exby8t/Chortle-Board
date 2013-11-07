@@ -2,9 +2,12 @@ class MembersController < ProtectedController
   # GET /members
   # GET /members.json
   def index
-    
-    if session[:member]
+    if params.has_key? :family_id
+      @members = Family.find(params[:family_id]).members
+
+    elsif session[:member]
       @members = Family.find(session[:member][:family][:id]).members
+    
     else
       @members = Member.all
     end
@@ -65,10 +68,10 @@ class MembersController < ProtectedController
   # PUT /members/1.json
   def update
     @member = Member.find(params[:id])
-
+    puts "!!!!!!!!! upate !!!!!!!!!!!!!"
     respond_to do |format|
       if @member.update_attributes(params[:member])
-        format.html { redirect_to family_members_path, notice: 'Member was successfully updated.' }
+        format.html { redirect_to "/#{@member.family.slug}/members"  , notice: 'Member was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
