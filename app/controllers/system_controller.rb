@@ -10,7 +10,7 @@ class SystemController < ApplicationController
   def capture
     
     members = Member.all
-    today = Date.today
+    today = Date.today - 1.day
 
     members.each do | member | 
 
