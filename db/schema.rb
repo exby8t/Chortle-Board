@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108164518) do
+ActiveRecord::Schema.define(:version => 20131108203108) do
 
   create_table "administrators", :force => true do |t|
     t.string   "email"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20131108164518) do
     t.boolean  "is_completed"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.date     "date"
   end
 
   add_index "todos", ["family_id"], :name => "index_todos_on_family_id"

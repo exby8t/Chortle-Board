@@ -42,33 +42,55 @@ describe Scheduler do
 
   it "should create todos for each task" do 
   	
+    Todo.destroy_all
     
     @scheduler.generate_todos(@today)
     
-  	todos = Todo.all 
+  	todos = Todo.all
   	
     #pp todos
     #create two weeks of todos
     #there should be 19 todos, 1 monthly, 4 weekly, and 14 daily
     expect(todos.count).to eq 19
   	
-    #validate the first task which is monthly
-  	expect(todos.first.family.name).to eq "test fam"
-  	expect(todos.first.year).to eq @today.year
-    expect(todos.first.month).to eq @today.month
-  	expect(todos.first.week).to be_nil
-    expect(todos.first.day).to be_nil
-  	
-    #validate the second
-  	expect(todos[1].family.name).to eq "test fam"
-  	expect(todos[1].week).to eq @today.cweek
-  	expect(todos[1].day).to be_nil
+    #test daily todos
+    d_task = Task.find_by_name('daily task')
+    d_todo = Todo.find_by_task_id_and_day(d_task.id, @today.day)
+    d_todos = Todo.find_all_by_task_id(d_task.id)
+
+    expect(d_todo).to_not be_nil
+    expect(d_todo.date).to_not be_nil
+    expect(d_todos.count).to eq 14
+
+    #test weekly todos
+    w_task = Task.find_by_name('first weekly task')
+    w_todo = Todo.find_by_task_id_and_week(w_task.id, @today.cweek)
+    w_todos = Todo.find_all_by_task_id(w_task.id)
+
+    expect(w_todo).to_not be_nil
+    expect(w_todos.count).to eq 2    
+    expect(w_todo.date).to_not be_nil
+    expect(w_todo.date.wday).to eq 0
+
+    #test monthly todos
+    m_task = Task.find_by_name('monthly task')
+    m_todo = Todo.find_by_task_id_and_month(m_task.id, @today.month)
+    m_todos = Todo.find_all_by_task_id(m_task.id)
+
+    expect(m_todo).to_not be_nil
+    expect(m_todos.count).to eq 1
+    expect(m_todo.date).to_not be_nil
+    expect(m_todo.date.wday).to eq 0
+  	#expect(todos[1].family.name).to eq "test fam"
+    #expect(todos[1].week).to eq @today.cweek
+    #expect(todos[1].day).to be_nil
     
-    expect(todos[5].day).to eq @today.wday
+    #expect(todos[5].day).to eq @today.wday
+    #expect(todo[1].date).to_not be_nil
     #pp todos.last
     #expect(todos.last.day).to eq (today + 14.days).mday
 
-    pp Todo.all
+    #pp Todo.all
     
     
   end

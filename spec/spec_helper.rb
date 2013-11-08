@@ -13,6 +13,7 @@ RSpec.configure do |config|
 config.before(:all) do 
 
     @family =  FactoryGirl.create(:family, {name: "test fam"})
+
     @cat1 =    FactoryGirl.create(:category, {name: "monthly"})
     @cat2 =    FactoryGirl.create(:category, {name: "weekly"})
     
@@ -20,10 +21,10 @@ config.before(:all) do
     @i_w =     FactoryGirl.create(:interval, {name: "Weekly"})
     @i_d =     FactoryGirl.create(:interval, {name: "Daily"})
 
-    @task1 =   FactoryGirl.create(:task, {name: "monthly task", interval_id: @i_m.id, category_id: @cat1.id})
-    @task2 =   FactoryGirl.create(:task, {name: "first weekly task", interval_id: @i_w.id, category_id: @cat2.id})
-    @task3 =   FactoryGirl.create(:task, {name: "second weekly task", interval_id: @i_w.id, category_id: @cat2.id})
-    @task4 =   FactoryGirl.create(:task, {name: "daily task", interval_id: @i_d.id, category_id: @cat2.id})
+    @monthly_task =   FactoryGirl.create(:task, {name: "monthly task", interval_id: @i_m.id, category_id: @cat1.id})
+    @weekly_task1 =   FactoryGirl.create(:task, {name: "first weekly task", interval_id: @i_w.id, category_id: @cat2.id})
+    @weekly_task2 =   FactoryGirl.create(:task, {name: "second weekly task", interval_id: @i_w.id, category_id: @cat2.id})
+    @daily_task =     FactoryGirl.create(:task, {name: "daily task", interval_id: @i_d.id, category_id: @cat2.id})
   end
 
   config.after(:all) do
@@ -34,10 +35,8 @@ config.before(:all) do
     @i_w.destroy
     @i_d.destroy
 
-    @task1.destroy
-    @task2.destroy
-    @task3.destroy
-    @task4.destroy
+    Task.destroy_all
+    Todo.destroy_all
 
     @family.destroy
 

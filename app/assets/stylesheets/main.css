@@ -25,6 +25,17 @@ h2 {
   color: #2c3e50;
   }
 
+h3 {
+  font-style: italic;
+  font-size:22px;
+  color: #2c2c2c;
+  }
+
+h3.day{
+  padding:2px 0px 0px 2px;
+  border-bottom: thin solid #85919c;
+  width:100%; float:left
+}
 
 .navbar .brand {
   text-shadow: none;

@@ -1,3 +1,5 @@
+
+
 <div class="row-fluid">
   <div class="span7">
     <h1>Todos for this Week</h1>
@@ -25,13 +27,29 @@
 
 
 
-
 <% @todos.keys.each do | key | %>
+
+<% previous_day = @todos[key].first.due_on %>
+
 <div class="row-fluid">
 <div id="todo-list" class="span12 well">
     <h2>By the <%= key.capitalize %></h2>
     
     <% @todos[key].each do | todo | %>
+
+    
+    <% unless todo.due_on.to_s == previous_day.to_s %>
+      <h3 class="day" >
+        <%= todo.due_on.strftime("%A") %>
+      </h3>
+      <% previous_day = todo.due_on %>
+
+      <% else %>
+      
+    <% end %>
+
+
+
     
     <div id="<%= todo.id %>" class="todo-box span5 <%= key %>" week="<%= todo.week %>">
 

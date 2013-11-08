@@ -3,6 +3,7 @@ class TasksController < ProtectedController
   # GET /tasks.json
   before_filter :require_admin_login
   
+  
   def index
     if session[:member]
       @tasks = Family.find(session[:member][:family][:id]).tasks
@@ -79,7 +80,8 @@ class TasksController < ProtectedController
   # DELETE /tasks/1.json
   def destroy
     @task = Task.find(params[:id])
-    @task.destroy
+    @task.is_active = false
+    @task.save
 
     respond_to do |format|
       format.html { redirect_to tasks_url }

@@ -15,7 +15,7 @@ class Scheduler
 
 
   def generate_todos(start_on)
-  	@tasks = Task.all 
+  	@tasks = Task.active 
     @start_on = start_on
 
   	@tasks.each do | task | 

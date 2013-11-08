@@ -2,13 +2,13 @@ require 'date'
 
 class Todo < ActiveRecord::Base
 
-  attr_accessible :day, :is_completed, :month, :week, :year
+  attr_accessible :day, :is_completed, :month, :week, :year, :date
   
   belongs_to :member
   belongs_to :task
   belongs_to :family
 
-  default_scope { order(:year, :month, :week, :day)}
+  default_scope { order(:date)}
 
   scope :completed, -> { where(is_completed: true)}
   scope :incompleted, -> {  where(is_completed: nil)}
@@ -73,15 +73,21 @@ class Todo < ActiveRecord::Base
   # CLASS METHODS
 
   def self.generate_monthly(family_id, task_id, today)
-	Todo.find_or_create_by_family_id_and_task_id_and_year_and_month(family_id, task_id, today.year, today.month )
+	t = Todo.find_or_create_by_family_id_and_task_id_and_year_and_month(family_id, task_id, today.year, today.month )
+  t.date = last_sunday_of_month(today.year, today.month)
+  t.save
   end
 
   def self.generate_weekly(family_id, task_id, today)
-	Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week(family_id, task_id, today.year, today.month, today.cweek )
+	t = Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week(family_id, task_id, today.year, today.month, today.cweek )
+  t.date = Date.commercial(today.year, today.cweek) + 6.days
+  t.save
   end
 
   def self.generate_daily(family_id, task_id, today)
-	Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week_and_day(family_id, task_id, today.year, today.month, today.cweek, today.mday )
+	t = Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week_and_day(family_id, task_id, today.year, today.month, today.cweek, today.mday )
+  t.date = today
+  t.save
   end
 
 
