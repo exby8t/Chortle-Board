@@ -1,9 +1,30 @@
+require 'date'
 class SystemController < ApplicationController
   layout 'system'
 
 
   def index
 
+  end
+
+  def capture
+    
+    members = Member.all
+    today = Date.today
+
+    members.each do | member | 
+
+      history = History.find_or_create_by_member_id_and_year_and_week(member.id, today.year, today.cweek)
+      history.quota = member.required_points
+      history.points = member.current_points
+      history.save
+
+    end
+
+    history_for_week = History.find_all_by_year_and_week(today.year, today.cweek)
+    render json: history_for_week
+
+    
   end
 
   def send_test

@@ -2,54 +2,6 @@ class TodosController < ProtectedController
   # GET /todos
   # GET /todos.json
 
-  def assign
-    @todo = Todo.find(params[:id])
-    @todo.member_id = params[:member_id]
-    puts @todo
-    puts "~~~~~~~~~~ save!"
-    @todo.save
-    render json: @todo
-  end
-
-  def unassign
-    @todo = Todo.find(params[:id])
-    @todo.member_id = nil
-    @todo.save
-
-    puts "unsassigned user"
-
-    render json: @todo
-      
-  end
-
-
-def complete
-    @todo = Todo.find_by_id_and_member_id(params[:id], params[:member_id])
-    puts @todo
-    @todo.is_completed = true
-    @todo.save
-
-    render json: @todo
-end
-
-def incomplete
-    @todo = Todo.find_by_id_and_member_id(params[:id], params[:member_id])
-    @todo.is_completed = nil
-    @todo.save
-
-    render json: @todo
-  end
-
-
-  def list
-   @todos = Todo.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @tasks }
-    end
-  end
-
-
   def index
 
     #generate missing todos from tasks
@@ -78,6 +30,16 @@ def incomplete
       format.json { render json: @todos }
     end
   end
+
+  def list
+   @todos = Todo.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @tasks }
+    end
+  end
+
+
 
   # GET /todos/1
   # GET /todos/1.json
@@ -149,4 +111,44 @@ def incomplete
       format.json { head :no_content }
     end
   end
+
+
+  def assign
+    @todo = Todo.find(params[:id])
+    @todo.member_id = params[:member_id]
+    puts @todo
+    puts "~~~~~~~~~~ save!"
+    @todo.save
+    render json: @todo
+  end
+
+  def unassign
+    @todo = Todo.find(params[:id])
+    @todo.member_id = nil
+    @todo.save
+
+    puts "unsassigned user"
+
+    render json: @todo
+      
+  end
+
+
+def complete
+    @todo = Todo.find_by_id_and_member_id(params[:id], params[:member_id])
+    puts @todo
+    @todo.is_completed = true
+    @todo.save
+
+    render json: @todo
+end
+
+def incomplete
+    @todo = Todo.find_by_id_and_member_id(params[:id], params[:member_id])
+    @todo.is_completed = nil
+    @todo.save
+
+    render json: @todo
+end
+
 end

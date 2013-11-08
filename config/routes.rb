@@ -6,6 +6,7 @@ ChoreBoardApp::Application.routes.draw do
 
   get "system/index"
   get "system/ping"
+  get "system/capture"
   get "system/send_reminder"
   get "system/send_status"
   get "system/send_warning"
@@ -17,6 +18,7 @@ ChoreBoardApp::Application.routes.draw do
   
   get "home/index", :as => :home
   get "home/about", :as => :about
+  get "home/history", :as => :history
   get "home/stats", :as => :stats
   
   get '/login' => 'login#index', :as => :login

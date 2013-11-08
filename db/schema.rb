@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107134601) do
+ActiveRecord::Schema.define(:version => 20131108164518) do
 
   create_table "administrators", :force => true do |t|
     t.string   "email"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(:version => 20131107134601) do
     t.datetime "updated_at", :null => false
     t.string   "slug"
   end
+
+  create_table "histories", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "year"
+    t.integer  "week"
+    t.integer  "quota"
+    t.integer  "points"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "histories", ["member_id"], :name => "index_histories_on_member_id"
 
   create_table "intervals", :force => true do |t|
     t.string   "name"

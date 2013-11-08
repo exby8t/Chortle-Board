@@ -11,6 +11,10 @@ class HomeController < ProtectedController
    @stats =  @member.current_stats
   end
 
+  def history
+   @history  =  @member.histories
+  end
+
   def about
   end
 

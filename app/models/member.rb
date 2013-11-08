@@ -6,6 +6,7 @@ class Member < ActiveRecord::Base
   belongs_to :family
   belongs_to :member_type
   has_many :todos
+  has_many :histories
 
   attr_accessible :birthdate, :email, :first_name, :last_name, :password, :family_id, :member_type_id, :required_points, :is_admin
 

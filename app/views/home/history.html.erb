@@ -1,0 +1,10 @@
+<h1>Your Past accomplishments</h1>
+
+<div class="row-fluid">
+	<% @history.each do | activity |  %>
+	<div class="well span5">
+		<h2><%= "Week of #{activity.week_of.strftime('%B %-d, %Y')}" %></h2>
+		<p> You achived <%= "#{activity.points} out of #{activity.quota}" %> points</p>
+	</div>
+	<% end %>
+</div>
