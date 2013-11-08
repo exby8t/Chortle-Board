@@ -12,6 +12,18 @@
 @media (max-width: 480px) {
 
 
+label {
+  display: block;
+  float:none;
+  margin-left:0px;
+  margin-right: 0px;
+  text-align: left;
+
+  }
+
+  div.actions{margin-left: 0px; margin-top: 0px}
+
+
 	h1{font-size:36px;}
 	h2{font-size:26px;}
 

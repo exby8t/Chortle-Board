@@ -70,7 +70,49 @@ div#current-points{
   .todo-details{font-style: italic;margin-left:20px;}
 
 
+div.checkbox-field input{
+  float:left;
+  margin-left:175px;
+  margin-right:10px;
+  margin-top: 5px;
+}
+
+div.checkbox-field label{
+  float:left;
+  width:400px;
+  text-align: left
+}
+
+div.date-field select{
+  width:100px;
+}
+
 label.inline{display:inline-block;}
+
+div.field {
+  width: 100%;
+  float: left;
+  }
+div.actions {
+  float:left;
+  width:100%;
+  margin-top: 15px;
+  margin-left: 175px;
+  margin-bottom: 10px;
+  }
+
+label {
+  margin-bottom: 5px;
+  float: left;
+  width: 165px;
+  font-size: 1.2em;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: 4px;
+  color: #5a6269;
+  font-weight: bold;
+  }
+
 span.due-today{
   float:left; 
   text-align:center;

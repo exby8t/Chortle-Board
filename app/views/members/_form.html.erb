@@ -33,7 +33,7 @@
     <%= f.number_field :required_points %>
   </div>
 
-  <div class="field">
+  <div class="field date-field" >
     <%= f.label :birthdate %>
     <%= f.date_select :birthdate %>
   </div>
@@ -44,7 +44,7 @@
     <%= f.collection_select :member_type_id, MemberType.all, :id, :name %>
   </div>
 
-  <div class="field">
+  <div class="field checkbox-field">
     <%= f.check_box :is_admin %>
     <%= f.label :is_admin, "This member is a family admin" , :class => 'inline' %>
   </div>
@@ -55,5 +55,3 @@
     <%= f.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
-<%= debug @member %>
-<%= debug params %>

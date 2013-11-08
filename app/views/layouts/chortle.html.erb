@@ -50,12 +50,14 @@
               
               <% begin %>
                 <li><%= link_to "Available Tasks", family_todos_path(@family) %></li>
+                <li><%= link_to "Manage Tasks", family_tasks_path(@family) %></li>
                 <% rescue %>
                 <li>oops</li>
               <% end %>
                
 
                <% if session[:member][:admin] %>
+
                  <li><%= link_to "Admin Panel", admin_home_path %></li>           
                <% end %>
 
