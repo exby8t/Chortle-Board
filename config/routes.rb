@@ -36,7 +36,10 @@ ChoreBoardApp::Application.routes.draw do
   resources :administrators
   resources :members
   resources :member_types
-  resources :families
+  resources :families  
+
+  
+  
 
   resources :families, path: "/" do 
      resources :members

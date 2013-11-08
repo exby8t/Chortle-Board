@@ -46,17 +46,22 @@
 
             <% if session[:member] %>
 
-             <li><%= link_to "My Todos", home_path %></li>
-             <li><%= link_to "Available Tasks", family_todos_path(@family) %></li>
-             
-             <% if session[:member][:admin] %>
-             <li><%= link_to "Admin Panel", admin_home_path %></li>
-             <li><%= link_to "Manage Tasks", family_tasks_path(@family) %></li>
-             <% end %>
+              <li><%= link_to "My Todos", home_path %></li>
+              
+              <% begin %>
+                <li><%= link_to "Available Tasks", family_todos_path(@family) %></li>
+                <% rescue %>
+                <li>oops</li>
+              <% end %>
+               
+
+               <% if session[:member][:admin] %>
+                 <li><%= link_to "Admin Panel", admin_home_path %></li>           
+               <% end %>
 
               <li><a rel="tooltip" href="<%= logout_path %>" title="Logout" >Logout
-                <i class="icon-share-alt"></i>
-             </a></li>
+                <i class="icon-share-alt"></i></a>
+              </li>
 
             <% else %>
                <li><a rel="tooltip" href="<%= login_path %>" title="Login to manage" >Login
