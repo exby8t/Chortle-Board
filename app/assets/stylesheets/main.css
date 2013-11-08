@@ -1,9 +1,6 @@
 body {
   font-size: 1.2em;
   padding-top: 60px;
-  background-image: url('/assets/c-fade.png');
-  background-position: center;
-  background-repeat: no-repeat;
   }
 
 .well
