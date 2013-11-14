@@ -57,6 +57,19 @@ div#current-points{
     font-weight: bold;
   }
 
+  .todo-box{
+    padding:5px; border:thin solid #ececec; 
+    margin-bottom:5px;
+  }
+
+  div.due-today{
+    color:#80b5e9; 
+    background-color: #fff; 
+    border:thin solid #80b5e9;
+    border-radius:4px; 
+    }
+
+
   .todo-title{font-weight: bold; font-size: 20px; margin-bottom:0px;}
 
   input.fat-checkbox[type='checkbox']:checked {
@@ -124,15 +137,6 @@ label {
   font-weight: bold;
   }
 
-span.due-today{
-  float:left; 
-  text-align:center;
-  color:#80b5e9; 
-  background-color: #fff; 
-  border:thin solid #80b5e9;
-  padding:4px; 
-  border-radius:4px; 
-  margin:5px 5px 2px 0px;}
 
 
 table{

@@ -20,18 +20,22 @@
 	<div class="span6 well">
 		<h2>Tasks Needing Doin'</h2>
 		<% @incompleted_todos.each do | todo | %>
-	    <div id="<%= todo.id %>" class="span5 todo-box " week="<%= todo.week %>">
+
+	  <div id="<%= todo.id %>" 
+         class="span5 todo-box 
+          <% if todo.past? %>past <% end %> 
+          <% if todo.due_today? %>due-today<% end %>
+          " 
+      week="<%= todo.week %>">
 
 		<p class="todo-title">
 			<%=raw todo_checkbox todo, {:action => 'completion', :owned => true} %>
       <%= todo.task.name %><br/>
     </p>
     <p class="todo-details">
-      <% if todo.due_today? %>
-        <span class="due-today">Due Now!</span>
-      <% end %>
-  
-  		<%= todo.date %> for <%= todo.task.points %> points
+      
+      
+  		Due on <%= todo.date.strftime("%A") %> for <%= todo.task.points %> points
 	   
   	</p>
 
@@ -47,8 +51,13 @@
 		
 		    <div id="<%= todo.id %>" class="span5 todo-box " week="<%= todo.week %>">
 
-			<p>
+			
+       <p class="todo-title"> 
 			<%=raw todo_checkbox todo, {:action => 'completion', :owned => true} %>
+      <%= todo.task.name %><br/>
+    </p>
+    <p class="todo-details">
+      
 			<%= todo.task.name %> completed  
 			for <%= todo.task.points %> points...
 			</p>
@@ -66,6 +75,9 @@
 <script>
   
   $(document).ready(function(){
+
+    $('div.past').hide();
+
     $('input').change(function(){
         var endpoint = '/todos';
         var url = endpoint

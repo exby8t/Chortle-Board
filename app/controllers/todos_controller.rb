@@ -13,8 +13,8 @@ class TodosController < ProtectedController
 
 
     @todos = {
-     :week => Todo.where(:year => Date.today.year, :month => Date.today.mon, :week => Date.today.cweek, :day => nil ),
      :day => Todo.where(:year => Date.today.year, :month => Date.today.mon).where('week = ? and day IS NOT NULL', Date.today.cweek),
+     :week => Todo.where(:year => Date.today.year, :month => Date.today.mon, :week => Date.today.cweek, :day => nil ),
      :month => Todo.where(:year => Date.today.year, :month => Date.today.mon, :week => nil, :day => nil )
  
     }

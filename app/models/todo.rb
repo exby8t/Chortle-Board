@@ -10,9 +10,16 @@ class Todo < ActiveRecord::Base
 
   default_scope { order(:date)}
 
-  scope :completed, -> { where(is_completed: true)}
-  scope :incompleted, -> {  where(is_completed: nil)}
+  scope :completed, -> { where(is_completed: true, week: Date.today.cweek)}
+  scope :incompleted, -> {  where(is_completed: nil, week: Date.today.cweek)}
 
+  def past?
+    if date < Date.today
+      true
+    else
+      false
+    end
+  end
 
   def assigned?
     if member.nil?
@@ -79,13 +86,15 @@ class Todo < ActiveRecord::Base
   end
 
   def self.generate_weekly(family_id, task_id, today)
-	t = Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week(family_id, task_id, today.year, today.month, today.cweek )
+	
+  t = Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week(family_id, task_id, today.year, today.month, today.cweek )
   t.date = Date.commercial(today.year, today.cweek) + 6.days
   t.save
   end
 
   def self.generate_daily(family_id, task_id, today)
-	t = Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week_and_day(family_id, task_id, today.year, today.month, today.cweek, today.mday )
+	puts "generate daily tasks for task #{task_id} on #{today.cweek}"
+  t = Todo.find_or_create_by_family_id_and_task_id_and_year_and_month_and_week_and_day(family_id, task_id, today.year, today.month, today.cweek, today.mday )
   t.date = today
   t.save
   end

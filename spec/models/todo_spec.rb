@@ -9,6 +9,18 @@ describe Todo do
     expect(todo.assigned?).to eq false
   end
 
+  it "knows if it's in the past or not" do 
+    past_todo = FactoryGirl.build(:todo, {date: Date.today - 1.day})
+    now_todo = FactoryGirl.build(:todo, {date: Date.today})
+    future_todo = FactoryGirl.build(:todo, {date: Date.today + 1.day})
+
+    expect(past_todo.past?).to eq true
+    expect(now_todo.past?).to eq false
+    expect(future_todo.past?).to eq false
+
+  end
+
+
   it "is NOT assigned if a member is NOT attached" do 
     member = FactoryGirl.create(:member)
     todo = FactoryGirl.build(:todo, {:member_id => member.id})
@@ -87,20 +99,20 @@ it "will display a due date for a weekly task on sunday" do
 
   it 'generates monthly tasks' do  
   	totes = Todo.all.count
-	wat = Todo.generate_monthly(@family.id, @task1.id, Date.today)
+	wat = Todo.generate_monthly(@family.id, @weekly_task1.id, Date.today)
   	expect(Todo.all.count).to eq totes + 1
   end
 
 
   it 'generates weekly tasks' do  
   	totes = Todo.all.count
-	wat = Todo.generate_weekly(@family.id, @task2.id, Date.today)
+	  wat = Todo.generate_weekly(@family.id, @weekly_task2.id, Date.today)
   	expect(Todo.all.count).to eq totes + 1
   end
 
   it 'generates daily tasks' do  
   	totes = Todo.all.count
-	wat = Todo.generate_daily(@family.id, @task2.id, Date.today)
+	wat = Todo.generate_daily(@family.id, @weekly_task2.id, Date.today)
   	expect(Todo.all.count).to eq totes + 1
   end
 

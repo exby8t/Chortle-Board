@@ -15,16 +15,23 @@ class Scheduler
 
 
   def generate_todos(start_on)
-  	@tasks = Task.active 
+  	@tasks = Task.find_all_by_is_active(true) 
     @start_on = start_on
-
+    
+    
+    
+    
   	@tasks.each do | task | 
-  		
+  		puts "~~~~~ generating todos for #{task.name} ~~~~~"
+    
       if task.interval.name == "Monthly"
+        puts " === its monthly"
   			generate_monthly_tasks(task)
 	  	elsif task.interval.name == "Weekly"
+        puts " === its weekly"
 	  		generate_weekly_tasks(task)
 	  	elsif task.interval.name == "Daily"
+        puts " === its daily"
         generate_daily_tasks(task)  		
 	  	end
 
